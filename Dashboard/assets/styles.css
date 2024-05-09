@@ -148,7 +148,7 @@ body {
     padding-bottom: 8px;
     text-align: center;
     font-weight: normal;
-    width: fit-content;
+    width: 100%;
 }
 
 .model-container {

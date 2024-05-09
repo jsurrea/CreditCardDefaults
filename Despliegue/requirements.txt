@@ -12,3 +12,4 @@ scikit-learn
 seaborn
 tensorflow-cpu
 python-dotenv
+psycopg2-binary

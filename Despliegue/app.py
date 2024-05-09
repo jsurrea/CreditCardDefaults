@@ -28,7 +28,7 @@ engine = psycopg2.connect(
     port=PORT
 )
 cursor = engine.cursor()
-query = "SELECT * FROM datos;"
+query = "SELECT * FROM customer_data;"
 df = pd.read_sql(query, engine)
 
 def create_treemap():

@@ -183,11 +183,37 @@ def update_output(on):
     return f'The switch is {on}.'
 
 
+@app.callback(
+    Output('output-container', 'children'),
+    [Input('sex-dropdown', 'value'),
+     Input('age-dropdown', 'value'),
+     Input('education-dropdown', 'value'),
+     Input('marital-status-dropdown', 'value'),
+     Input('bill-amount-slider', 'value'),
+     Input('pay-amount-slider', 'value'),
+     Input('credit-limit-slider', 'value')]
+)
+def update_output(*values):
+    return 'Selected Values: ' + ', '.join([str(val) for val in values if val is not None])
+
+
+# Callback para capturar los valores de los switches y otros inputs
+@app.callback(
+    Output('output-container', 'children'),
+    [Input(f'month-switch-{month}', 'on') for month in ['April', 'May', 'June', 'July', 'August', 'September']]
+   
+)
+def update_output(*values):
+    return 'Selected Values: ' + ', '.join([str(val) for val in values])
+
+
+
+
 
 app.layout = html.Div([
     html.Header([
         html.Section([
-            html.H1("CREDIT CARD DEFAULTS"),
+            html.H1("Credit Card Defaults"),
             html.P("Herramienta analítica para prever y gestionar el riesgo de incumplimiento en tarjetas de crédito."),
         ], className="header-title"),
         html.Section([
@@ -213,44 +239,121 @@ app.layout = html.Div([
                 dcc.Graph(id="graph-indicator", figure=create_indicator()),
                 html.P("Exhibe ingresos, pérdidas por deudas impagas y ganancias netas, enfatizando el rendimiento financiero."),
             ], className="card", style={'width': '40%', 'height': '100%'}),  # 40% del ancho
-        ], className="main-graphs"),
+        ], className="main-graphs", style={'height': '560px'}),
         html.Section([
             html.H2("Modelos de Machine Learning"),
-
-            #prueba de componentes
-            dcc.Dropdown(
-                id='categorical-dropdown',
-                options=[
-                    {'label': 'Option 1', 'value': 'option1'},
-                    {'label': 'Option 2', 'value': 'option2'},
-                    {'label': 'Option 3', 'value': 'option3'}
-                ],
-                value='option1'
-            ),
-            html.Div(id='dropdown-output'),
-
-            daq.BooleanSwitch(id='my-boolean-switch', on=False),
-            #-----------
-
-            html.Div(id='boolean-switch-output-1'),
             html.Div([
-                html.Div([
-                    html.H3("Sweing Department"),
-                    html.P("Este modelo predice la productividad en el departamento de Sweing."),
-                    html.P("Seleccione el incentivo para obtener una predicción."),
-                    dcc.Slider(0, 120, 5, value=20, id='sweing-slider'),
-                    dcc.Graph(id="gauge-sweing", figure=create_gauge_figure_sweing(0)),
-                ], className="model-container"),
-                html.Div([
-                    html.H3("Finishing Department"),
-                    html.P("Este modelo predice la productividad en el departamento de Finishing."),
-                    html.P("Seleccione el tiempo asignado para obtener una predicción."),
-                    dcc.Slider(2, 6, 0.25, value=3, id='finishing-slider'),
-                    dcc.Graph(id="gauge-finishing", figure=create_gauge_figure_sweing(0)),
-                ], className="model-container")
-            ], className="main-models"),
+                html.Section([
+                    html.Section([
+                        html.H3("Demografía"),
+
+                        # Dropdowns para sexo, edad, educación, estado civil
+                        html.Div([
+                            dcc.Dropdown(
+                                id='sex-dropdown',
+                                options=[
+                                    {'label': 'Male', 'value': 'M'},
+                                    {'label': 'Female', 'value': 'F'}
+                                ],
+                                placeholder="Select Sex"
+                            ),
+                            dcc.Dropdown(
+                                id='age-dropdown',
+                                options=[
+                                    {'label': age, 'value': age} for age in ['Young Adult', 'Adult', 'Senior']
+                                ],
+                                placeholder="Select Age Group"
+                            ),
+                            dcc.Dropdown(
+                                id='education-dropdown',
+                                options=[
+                                    {'label': 'High School', 'value': 'HS'},
+                                    {'label': 'Bachelor', 'value': 'BA'},
+                                    {'label': 'Master', 'value': 'MA'},
+                                    {'label': 'PhD', 'value': 'PHD'}
+                                ],
+                                placeholder="Select Education"
+                            ),
+                            dcc.Dropdown(
+                                id='marital-status-dropdown',
+                                options=[
+                                    {'label': 'Single', 'value': 'Single'},
+                                    {'label': 'Married', 'value': 'Married'},
+                                    {'label': 'Divorced', 'value': 'Divorced'}
+                                ],
+                                placeholder="Select Marital Status"
+                            )
+                        ], style={'padding': '20px', 'display': 'flex', 'flex-direction': 'column', 'justifyContent': 'space-between', 'gap': '5px'}),
+                    ]),
+                    html.Section([
+                        html.H3("Crédito"),
+                        # Sliders para Bill Amount, Pay Amount y Credit Limit
+                        html.Div([
+                            html.Div([
+                                html.P("Bill Amount:"),    
+                                dcc.Slider(
+                                    id='bill-amount-slider',
+                                    min=0,
+                                    max=10000,
+                                    step=500,
+                                    value=5000,
+                                    marks={i: str(i) for i in range(0, 10001, 2000)},
+                                    tooltip={"placement": "bottom", "always_visible": True}
+                                ),
+                            ], style={'display': 'grid', 'justifyContent': 'space-between', 'gap': '5px', 'gridTemplateColumns': '100px 1fr'}),
+                            html.Div([
+                                html.P("Credit Limit:"),    
+                                dcc.Slider(
+                                    id='credit-limit-slider',
+                                    min=1000,
+                                    max=50000,
+                                    step=1000,
+                                    value=10000,
+                                    marks={i: str(i) for i in range(1000, 50001, 10000)},
+                                    tooltip={"placement": "bottom", "always_visible": True}
+                                )
+                            ], style={'display': 'grid', 'justifyContent': 'space-between', 'gap': '5px', 'gridTemplateColumns': '100px 1fr'}),
+                            html.Div([
+                                html.P("Pay Amount:"),    
+                                dcc.Slider(
+                                    id='pay-amount-slider',
+                                    min=0,
+                                    max=5000,
+                                    step=100,
+                                    value=2500,
+                                    marks={i: str(i) for i in range(0, 5001, 1000)},
+                                    tooltip={"placement": "bottom", "always_visible": True}
+                                ),
+                            ], style={'display': 'grid', 'justifyContent': 'space-between', 'gap': '5px', 'gridTemplateColumns': '100px 1fr'}),
+                        ], style={'padding': '20px', 'display': 'flex', 'flex-direction': 'column', 'justifyContent': 'space-between', 'gap': '10px'}),
+                    ]),
+                    html.Section([
+                        html.H3("Historial de Pagos"),
+                        # Switches para los meses de abril a septiembre
+                        html.Div([
+                                daq.BooleanSwitch(
+                                id=f'month-switch-{month}',
+                                label=f'{month}',
+                                labelPosition="top",
+                                on=False
+                            ) for month in ['April', 'May', 'June', 'July', 'August', 'September']
+                        ], style={'display': 'flex', 'justifyContent': 'space-between', 'padding': '20px', 'min-width': '80px'}),
+                    ]),
+                ], style={'width': '100%', 'padding': '40px 80px', 'display': 'flex', 'justifyContent': 'space-between', 'gap': '20px', 'flex-direction': 'column'}),
+                html.Section([
+                    html.H3("Predicción de Default", style={'textAlign': 'center'}),	
+                    html.Div([
+                        html.P("Este modelo predice la probabilidad de incumplimiento en el próximo mes basado en la información ingresada."),
+                        dcc.Graph(id="gauge-sweing", figure=create_gauge_figure_sweing(0)),
+                    ], className="model-container"),
+                ]),
+            ], className="ml-container"),
         ], className="card main-models-container"),
     ], className="main-container"),
+    html.Footer([
+        html.P("Desarrollado por Haider Fonseca, Daniela Arenas y Sebastian Urrea"),
+        html.P("Analítica Computacional para la Toma de Decisiones - Universidad de los Andes - 2024"),
+    ], className="footer-container"),
 ], className="root-container")
 
 

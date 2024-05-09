@@ -52,8 +52,12 @@ body {
 }
 
 .header-title {
-    color: var(--Text-Light);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: var(--Card);
+    font-family: 'Open Sans', 'Roboto', sans-serif;
+    background-color: var(--Primary);
+    padding: 8px 16px;
+    border-radius: 10px;
+    margin-top: 20px;
 }
 
 .header-title h1 {
@@ -67,7 +71,8 @@ body {
 }
 
 .header-logo {
-    width: 250px;
+    width: 200px;
+    margin-top: 20px;
 }
 
 .header-logo img {
@@ -148,7 +153,6 @@ body {
 
 .model-container {
     width: 100%;
-    height: 100%;
     padding: 0 128px;
 }
 
@@ -183,5 +187,30 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.ml-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.footer-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.footer-container p {
+    color: var(--Text-Opaque);
+    font-size: 12px;
+    text-align: center;
 }
 

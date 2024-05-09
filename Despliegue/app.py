@@ -31,6 +31,33 @@ cursor = engine.cursor()
 query = "SELECT * FROM customer_data;"
 df = pd.read_sql(query, engine)
 
+df = df.rename(columns={
+    'credit_limit': 'Credit Limit',
+    'sex': 'Sex',
+    'education': 'Education',
+    'marriage': 'Marriage',
+    'age': 'Age',
+    'payed_status_in_september': 'Payed Status in September',
+    'payed_status_in_august': 'Payed Status in August',
+    'payed_status_in_july': 'Payed Status in July',
+    'payed_status_in_june': 'Payed Status in June',
+    'payed_status_in_may': 'Payed Status in May',
+    'payed_status_in_april': 'Payed Status in April',
+    'bill_amount_in_september': 'Bill Amount in September',
+    'bill_amount_in_august': 'Bill Amount in August',
+    'bill_amount_in_july': 'Bill Amount in July',
+    'bill_amount_in_june': 'Bill Amount in June',
+    'bill_amount_in_may': 'Bill Amount in May',
+    'bill_amount_in_april': 'Bill Amount in April',
+    'amount_paid_in_september': 'Amount Paid in September',
+    'amount_paid_in_august': 'Amount Paid in August',
+    'amount_paid_in_july': 'Amount Paid in July',
+    'amount_paid_in_june': 'Amount Paid in June',
+    'amount_paid_in_may': 'Amount Paid in May',
+    'amount_paid_in_april': 'Amount Paid in April',
+    'defaulted_payment_next_month': 'Defaulted Payment Next Month'
+})
+
 def create_treemap():
     temp_df = df.copy()
     mean_defaulted = temp_df['Defaulted Payment Next Month'].mean()

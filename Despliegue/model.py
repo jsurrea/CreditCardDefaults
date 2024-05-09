@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 import pickle as pkl
 
-model = tf.keras.models.load_model('model_reducido.keras')
+model = tf.keras.models.load_model('modelo_reducido.keras')
 scaler = pkl.load(open('scaler_reducido.pkl', 'rb'))
 
 def predict(

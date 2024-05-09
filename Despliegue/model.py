@@ -1,6 +1,13 @@
 import numpy as np
 import tensorflow as tf
 import pickle as pkl
+import keras
+from keras.layers import Layer
+
+@keras.saving.register_keras_serializable()
+class ExpandDimsLayer(Layer):
+    def call(self, inputs):
+        return tf.expand_dims(inputs, axis=-1)
 
 model = tf.keras.models.load_model('modelo_reducido.keras')
 scaler = pkl.load(open('scaler_reducido.pkl', 'rb'))

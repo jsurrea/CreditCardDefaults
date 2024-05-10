@@ -2,6 +2,8 @@
 
 Credit Card Defaults es un sistema de análisis de datos diseñado específicamente para la industria financiera. Proporciona visualizaciones interactivas y modelos de machine learning para ayudar en la toma de decisiones respecto al riesgo de no-pago por parte de clientes de tarjetas de crédito. Su diseño apoya al área de ventas de un banco, interesada en maximizar los ingresos obtenidos por concepto de intereses, pero buscando al mismo tiempo minimizar los clientes morosos.
 
+<img width="1561" alt="image" src="https://github.com/jsurrea/CreditCardDefaults/assets/68788933/51611259-92f3-4ef6-8baf-e3cade689978">
+
 ## Instalación
 
 1. Clona este repositorio en una instancia EC2 de AWS.
@@ -41,9 +43,17 @@ Credit Card Defaults es un sistema de análisis de datos diseñado específicame
 ## Funcionalidades
 
 - Visualizar mediante *drill-down* la probabilidad de *default* según características demográficas a través de un *treemap*.
+
+https://github.com/jsurrea/CreditCardDefaults/assets/68788933/2ca44a46-9804-49e0-9382-2ab3a94e403e
+
 - Visualizar por medio de KPIs los ingresos, pérdidas y ganancias esperadas asumiendo un margen de ganancia del 5% y una recuperación de cartera del 30%.
 - Visualizar la evolución del estado de pago en los 6 meses anteriores de un subconjunto de 500 clientes por medio de un *Parallel Coordinates Graph*.
+
+https://github.com/jsurrea/CreditCardDefaults/assets/68788933/cd1e9270-9df5-4b11-b7cb-6ac4747c80af
+
 - Predecir la probabilidad de *default* de un nuevo cliente dadas sus características demográficas y su historial de pagos.
+
+https://github.com/jsurrea/CreditCardDefaults/assets/68788933/0ad77bb1-3d89-4a14-9692-1545ea49f9bc
 
 ## Autores
 

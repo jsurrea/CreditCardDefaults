@@ -31,12 +31,12 @@ Credit Card Defaults es un sistema de análisis de datos diseñado específicame
 - Tarea 6/Soporte 5: Snapshots de las máquinas lanzadas y archivos de configuración se encuentran disponibles en `DevOps/`.
 - Archivos de Despliegue/Soporte 5: Modelos serializados, archivos *environment* y versión final del tablero se encuentran en `Despliegue/`.
 - Repositorio Git/Soporte 6: Disponible en la dirección URL: [https://github.com/jsurrea/CreditCardDefaults](https://github.com/jsurrea/CreditCardDefaults).
-- Tablero desplegado: Disponible en la dirección URL: [http://50.19.105.14](http://50.19.105.14).
+- Tablero desplegado: Disponible en la dirección URL: [http://50.19.105.14:8050/](http://50.19.105.14:8050/).
 
 ## Uso
 
 1. Ejecuta el servidor del panel de visualización con `screen -S dashboard_session -d -m python app.py`.
-2. Abre un navegador web y navega a `http://50.19.105.14` para acceder al panel de Credit Card Defaults.
+2. Abre un navegador web y navega a `http://50.19.105.14:8050/` para acceder al panel de Credit Card Defaults.
 
 ## Funcionalidades
 
